@@ -7,6 +7,7 @@ import {
   TrendingUp,
   PanelLeft,
   ChevronRight,
+  UserPlus,
 } from "lucide-react";
 
 // Router
@@ -102,6 +103,21 @@ const navItems = [
       {
         title: "Mening davomatim",
         url: "/attendance/my",
+      },
+    ],
+  },
+  {
+    title: "Sotuvlar",
+    icon: UserPlus,
+    isActive: false,
+    items: [
+      {
+        title: "Barcha sotuvlar",
+        url: "/leads",
+      },
+      {
+        title: "Manbalar",
+        url: "/leads/sources",
       },
     ],
   },

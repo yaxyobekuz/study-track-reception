@@ -22,6 +22,11 @@ import TaskDetailPage from "@/features/tasks/pages/TaskDetailPage";
 import AttendancePage from "@/features/attendance/pages/AttendancePage";
 import MyAttendancePage from "@/features/attendance/pages/MyAttendancePage";
 
+// Pages — Leads
+import LeadsPage from "@/features/leads/pages/LeadsPage";
+import LeadDetailPage from "@/features/leads/pages/LeadDetailPage";
+import LeadSourcesPage from "@/features/leads/pages/LeadSourcesPage";
+
 // Router
 import { Routes as RoutesWrapper, Route, Navigate } from "react-router-dom";
 
@@ -46,6 +51,11 @@ const Routes = () => {
           {/* Attendance */}
           <Route path="/attendance" element={<AttendancePage />} />
           <Route path="/attendance/my" element={<MyAttendancePage />} />
+
+          {/* Leads */}
+          <Route path="/leads" element={<LeadsPage />} />
+          <Route path="/leads/sources" element={<LeadSourcesPage />} />
+          <Route path="/leads/:leadId" element={<LeadDetailPage />} />
         </Route>
       </Route>
 
