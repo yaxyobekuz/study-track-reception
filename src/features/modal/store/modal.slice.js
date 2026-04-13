@@ -8,6 +8,14 @@ const initialState = {
   bugReport: initialModalData,
   downloadApp: initialModalData,
   excuseRequest: initialModalData,
+
+  // Lead
+  leadForm: initialModalData,
+  leadStatus: initialModalData,
+
+  // Lead Source
+  leadSourceForm: initialModalData,
+  leadSourceDelete: initialModalData,
 };
 
 export const modalSlice = createSlice({
