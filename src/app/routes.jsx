@@ -26,6 +26,9 @@ import MyAttendancePage from "@/features/attendance/pages/MyAttendancePage";
 import LeadsPage from "@/features/leads/pages/LeadsPage";
 import LeadDetailPage from "@/features/leads/pages/LeadDetailPage";
 import LeadSourcesPage from "@/features/leads/pages/LeadSourcesPage";
+import LeadFormPage from "@/features/leads/pages/LeadFormPage";
+import LeadDirectionsPage from "@/features/leads/pages/LeadDirectionsPage";
+import LeadCategoriesPage from "@/features/leads/pages/LeadCategoriesPage";
 
 // Router
 import { Routes as RoutesWrapper, Route, Navigate } from "react-router-dom";
@@ -54,8 +57,12 @@ const Routes = () => {
 
           {/* Leads */}
           <Route path="/leads" element={<LeadsPage />} />
+          <Route path="/leads/new" element={<LeadFormPage />} />
           <Route path="/leads/sources" element={<LeadSourcesPage />} />
+          <Route path="/leads/directions" element={<LeadDirectionsPage />} />
+          <Route path="/leads/categories" element={<LeadCategoriesPage />} />
           <Route path="/leads/:leadId" element={<LeadDetailPage />} />
+          <Route path="/leads/:leadId/edit" element={<LeadFormPage />} />
         </Route>
       </Route>
 

@@ -119,6 +119,14 @@ const navItems = [
         title: "Manbalar",
         url: "/leads/sources",
       },
+      {
+        title: "Yo'nalishlar",
+        url: "/leads/directions",
+      },
+      {
+        title: "Toifalar",
+        url: "/leads/categories",
+      },
     ],
   },
 ];
