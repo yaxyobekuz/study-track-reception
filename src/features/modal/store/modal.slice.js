@@ -10,12 +10,19 @@ const initialState = {
   excuseRequest: initialModalData,
 
   // Lead
-  leadForm: initialModalData,
   leadStatus: initialModalData,
 
   // Lead Source
   leadSourceForm: initialModalData,
   leadSourceDelete: initialModalData,
+
+  // Lead Direction
+  leadDirectionForm: initialModalData,
+  leadDirectionDelete: initialModalData,
+
+  // Lead Category
+  leadCategoryForm: initialModalData,
+  leadCategoryDelete: initialModalData,
 };
 
 export const modalSlice = createSlice({

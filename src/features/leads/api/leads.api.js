@@ -20,4 +20,16 @@ export const leadsAPI = {
   createSource: (data) => http.post("/leads/sources", data),
   updateSource: (id, data) => http.put(`/leads/sources/${id}`, data),
   deleteSource: (id) => http.delete(`/leads/sources/${id}`),
+
+  // Lead directions
+  getDirections: (params) => http.get("/leads/directions", { params }),
+  createDirection: (data) => http.post("/leads/directions", data),
+  updateDirection: (id, data) => http.put(`/leads/directions/${id}`, data),
+  deleteDirection: (id) => http.delete(`/leads/directions/${id}`),
+
+  // Lead categories
+  getCategories: (params) => http.get("/leads/categories", { params }),
+  createCategory: (data) => http.post("/leads/categories", data),
+  updateCategory: (id, data) => http.put(`/leads/categories/${id}`, data),
+  deleteCategory: (id) => http.delete(`/leads/categories/${id}`),
 };
