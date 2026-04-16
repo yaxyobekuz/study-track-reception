@@ -344,8 +344,8 @@ const LeadDetailPage = () => {
           </Card>
 
           {/* Activities timeline */}
-          <Card title="Harakatlar tarixi">
-            <div className="mt-3 space-y-3">
+          <Card title="Harakatlar tarixi" className="space-y-4">
+            <div>
               {activities.length === 0 ? (
                 <p className="text-sm text-gray-400 text-center py-4">
                   Hali harakatlar yo'q
@@ -354,28 +354,34 @@ const LeadDetailPage = () => {
                 activities.map((activity) => (
                   <div
                     key={activity._id}
-                    className="relative pl-4 pb-3 border-l-2 border-gray-200 last:border-l-0 last:pb-0"
+                    className="relative pl-4 pb-3 border-l-2 border-gray-200 last:border-l-transparent last:pb-0"
                   >
-                    <div className="absolute -left-[5px] top-1.5 size-2 rounded-full bg-gray-400" />
+                    {/* Dot */}
+                    <div className="absolute -left-[5px] top-0 size-2 rounded-full bg-gray-400" />
+
                     <div className="flex items-center gap-2 mb-1">
                       <span
                         className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium ${leadActivityTypeColors[activity.type]}`}
                       >
                         {leadActivityTypeLabels[activity.type]}
                       </span>
-                      <span className="text-[10px] text-gray-400">
+
+                      <span className="text-xs text-gray-400">
                         {formatDateUZ(activity.createdAt)}
                       </span>
                     </div>
+
                     <p className="text-sm text-gray-700">
                       {activity.description}
                     </p>
+
                     {activity.previousStatus && activity.newStatus && (
                       <p className="text-xs text-gray-400 mt-0.5">
                         {leadStatusLabels[activity.previousStatus]} →{" "}
                         {leadStatusLabels[activity.newStatus]}
                       </p>
                     )}
+
                     {activity.createdBy && (
                       <p className="text-[10px] text-gray-400 mt-0.5">
                         {activity.createdBy.firstName}{" "}
