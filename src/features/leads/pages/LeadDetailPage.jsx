@@ -39,7 +39,6 @@ import Card from "@/shared/components/ui/Card";
 import Button from "@/shared/components/ui/button/Button";
 import InputField from "@/shared/components/ui/input/InputField";
 import SelectField from "@/shared/components/ui/select/SelectField";
-import LeadFormModal from "@/features/leads/components/LeadFormModal";
 import LeadStatusModal from "@/features/leads/components/LeadStatusModal";
 
 // Hooks
@@ -50,7 +49,6 @@ const LeadDetailPage = () => {
   const { leadId } = useParams();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { openModal } = useModal("leadForm");
   const { openModal: openStatusModal } = useModal("leadStatus");
 
   // Activity form state
@@ -161,7 +159,7 @@ const LeadDetailPage = () => {
           <Button
             variant="outline"
             className="gap-1.5 text-sm"
-            onClick={() => openModal("leadForm", { lead })}
+            onClick={() => navigate(`/leads/${lead._id}/edit`)}
           >
             <Edit size={14} />
             Tahrirlash
@@ -264,6 +262,18 @@ const LeadDetailPage = () => {
                   {lead.source?.name || "-"}
                 </p>
               </div>
+              {lead.direction?.name && (
+                <div>
+                  <p className="text-xs text-gray-400">Yo'nalish</p>
+                  <p className="text-sm text-gray-800">{lead.direction.name}</p>
+                </div>
+              )}
+              {lead.category?.name && (
+                <div>
+                  <p className="text-xs text-gray-400">Toifa</p>
+                  <p className="text-sm text-gray-800">{lead.category.name}</p>
+                </div>
+              )}
               <div>
                 <p className="text-xs text-gray-400">Yaratilgan sana</p>
                 <p className="text-sm text-gray-800">
@@ -397,7 +407,6 @@ const LeadDetailPage = () => {
       </div>
 
       {/* Modals */}
-      <LeadFormModal />
       <LeadStatusModal />
     </div>
   );
