@@ -5,7 +5,7 @@ import { useRef } from "react";
 import { Plus } from "lucide-react";
 
 // Router
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Data
 import {
@@ -24,7 +24,6 @@ import { formatDateUZ } from "@/shared/utils/date.utils";
 import { leadsAPI } from "@/features/leads/api/leads.api";
 
 // Hooks
-import useModal from "@/shared/hooks/useModal";
 import useObjectState from "@/shared/hooks/useObjectState";
 
 // Components
@@ -34,11 +33,10 @@ import Pagination from "@/shared/components/ui/Pagination";
 import InputField from "@/shared/components/ui/input/InputField";
 import InputGroup from "@/shared/components/ui/input/InputGroup";
 import SelectField from "@/shared/components/ui/select/SelectField";
-import LeadFormModal from "@/features/leads/components/LeadFormModal";
 
 const LeadsPage = () => {
   const contentRef = useRef(null);
-  const { openModal } = useModal("leadForm");
+  const navigate = useNavigate();
 
   const { state, setField, setFields } = useObjectState({
     page: 1,
@@ -96,7 +94,7 @@ const LeadsPage = () => {
           Sotuvlar <span className="opacity-70">({pagination?.total || 0})</span>
         </h1>
 
-        <Button onClick={() => openModal("leadForm")}>
+        <Button onClick={() => navigate("/leads/new")}>
           <Plus />
           Yangi sotuv
         </Button>
@@ -227,8 +225,6 @@ const LeadsPage = () => {
         />
       )}
 
-      {/* Create/Edit Modal */}
-      <LeadFormModal />
     </div>
   );
 };
