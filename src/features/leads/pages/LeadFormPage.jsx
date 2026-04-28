@@ -48,6 +48,7 @@ const LeadFormPage = () => {
     address: "",
     notes: "",
     expectedEnrollDate: "",
+    createdAt: new Date().toISOString().split("T")[0],
   });
 
   // Fetch lead data for edit mode
@@ -78,6 +79,9 @@ const LeadFormPage = () => {
         expectedEnrollDate: lead.expectedEnrollDate
           ? new Date(lead.expectedEnrollDate).toISOString().split("T")[0]
           : "",
+        createdAt: lead.createdAt
+          ? new Date(lead.createdAt).toISOString().split("T")[0]
+          : new Date().toISOString().split("T")[0],
       });
     }
   }, [lead]);
@@ -139,6 +143,7 @@ const LeadFormPage = () => {
     const payload = { ...form };
     if (!payload.expectedEnrollDate) delete payload.expectedEnrollDate;
     if (!payload.additionalPhone) delete payload.additionalPhone;
+    if (!payload.createdAt) delete payload.createdAt;
 
     mutation.mutate(payload);
   };
@@ -266,13 +271,22 @@ const LeadFormPage = () => {
               placeholder="Manzil"
             />
 
-            <InputField
-              type="date"
-              label="Kutilayotgan ro'yxat sanasi"
-              name="expectedEnrollDate"
-              value={form.expectedEnrollDate}
-              onChange={(e) => setField("expectedEnrollDate", e.target.value)}
-            />
+            <InputGroup className="grid-cols-2">
+              <InputField
+                type="date"
+                label="Sotuv sanasi"
+                name="createdAt"
+                value={form.createdAt}
+                onChange={(e) => setField("createdAt", e.target.value)}
+              />
+              <InputField
+                type="date"
+                label="Kutilayotgan ro'yxat sanasi"
+                name="expectedEnrollDate"
+                value={form.expectedEnrollDate}
+                onChange={(e) => setField("expectedEnrollDate", e.target.value)}
+              />
+            </InputGroup>
 
             <InputField
               type="textarea"
