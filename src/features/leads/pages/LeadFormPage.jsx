@@ -149,168 +149,166 @@ const LeadFormPage = () => {
   };
 
   return (
-    <div>
+    <div className="space-y-4">
       <BackHeader
         href={isEdit ? `/leads/${leadId}` : "/leads"}
         title={isEdit ? "Sotuvni tahrirlash" : "Yangi sotuv"}
       />
 
-      <div className="container py-4">
-        <Card>
-          <form onSubmit={handleSubmit} className="space-y-3">
-            <InputGroup className="grid-cols-2">
-              <InputField
-                required
-                label="Ism"
-                name="firstName"
-                value={form.firstName}
-                onChange={(e) => setField("firstName", e.target.value)}
-                placeholder="Ism"
-              />
-              <InputField
-                required
-                label="Familiya"
-                name="lastName"
-                value={form.lastName}
-                onChange={(e) => setField("lastName", e.target.value)}
-                placeholder="Familiya"
-              />
-            </InputGroup>
+      <Card>
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <InputGroup className="grid-cols-2">
+            <InputField
+              required
+              label="Ism"
+              name="firstName"
+              value={form.firstName}
+              onChange={(e) => setField("firstName", e.target.value)}
+              placeholder="Ism"
+            />
+            <InputField
+              required
+              label="Familiya"
+              name="lastName"
+              value={form.lastName}
+              onChange={(e) => setField("lastName", e.target.value)}
+              placeholder="Familiya"
+            />
+          </InputGroup>
 
-            <InputGroup className="grid-cols-2">
-              <InputField
-                required
-                type="tel"
-                label="Telefon"
-                name="phone"
-                value={form.phone}
-                onChange={(e) => setField("phone", e.target.value)}
-                placeholder="+998..."
-              />
-              <InputField
-                type="tel"
-                label="Qo'shimcha telefon"
-                name="additionalPhone"
-                value={form.additionalPhone}
-                onChange={(e) => setField("additionalPhone", e.target.value)}
-                placeholder="+998..."
-              />
-            </InputGroup>
+          <InputGroup className="grid-cols-2">
+            <InputField
+              required
+              type="tel"
+              label="Telefon"
+              name="phone"
+              value={form.phone}
+              onChange={(e) => setField("phone", e.target.value)}
+              placeholder="+998..."
+            />
+            <InputField
+              type="tel"
+              label="Qo'shimcha telefon"
+              name="additionalPhone"
+              value={form.additionalPhone}
+              onChange={(e) => setField("additionalPhone", e.target.value)}
+              placeholder="+998..."
+            />
+          </InputGroup>
 
+          <SelectField
+            required
+            searchable
+            label="Manba"
+            name="source"
+            value={form.source}
+            onChange={(v) => setField("source", v)}
+            placeholder="Manbani tanlang..."
+            options={sources.map((s) => ({ value: s._id, label: s.name }))}
+          />
+
+          <InputGroup className="grid-cols-2">
             <SelectField
               required
               searchable
-              label="Manba"
-              name="source"
-              value={form.source}
-              onChange={(v) => setField("source", v)}
-              placeholder="Manbani tanlang..."
-              options={sources.map((s) => ({ value: s._id, label: s.name }))}
+              label="Yo'nalish"
+              name="direction"
+              value={form.direction}
+              onChange={(v) => setField("direction", v)}
+              placeholder="Yo'nalishni tanlang..."
+              options={directions.map((d) => ({
+                value: d._id,
+                label: d.name,
+              }))}
             />
+            <SelectField
+              required
+              searchable
+              label="Toifa"
+              name="category"
+              value={form.category}
+              onChange={(v) => setField("category", v)}
+              placeholder="Toifani tanlang..."
+              options={categories.map((c) => ({
+                value: c._id,
+                label: c.name,
+              }))}
+            />
+          </InputGroup>
 
-            <InputGroup className="grid-cols-2">
-              <SelectField
-                required
-                searchable
-                label="Yo'nalish"
-                name="direction"
-                value={form.direction}
-                onChange={(v) => setField("direction", v)}
-                placeholder="Yo'nalishni tanlang..."
-                options={directions.map((d) => ({
-                  value: d._id,
-                  label: d.name,
-                }))}
-              />
-              <SelectField
-                required
-                searchable
-                label="Toifa"
-                name="category"
-                value={form.category}
-                onChange={(v) => setField("category", v)}
-                placeholder="Toifani tanlang..."
-                options={categories.map((c) => ({
-                  value: c._id,
-                  label: c.name,
-                }))}
-              />
-            </InputGroup>
+          <InputField
+            label="Sinf / Yosh guruhi"
+            name="classInterest"
+            value={form.classInterest}
+            onChange={(e) => setField("classInterest", e.target.value)}
+            placeholder="Masalan: 5-sinf, 7-8 yosh"
+          />
 
+          <InputGroup className="grid-cols-2">
             <InputField
-              label="Sinf / Yosh guruhi"
-              name="classInterest"
-              value={form.classInterest}
-              onChange={(e) => setField("classInterest", e.target.value)}
-              placeholder="Masalan: 5-sinf, 7-8 yosh"
+              label="Ota-ona ismi"
+              name="parentName"
+              value={form.parentName}
+              onChange={(e) => setField("parentName", e.target.value)}
+              placeholder="Ota-ona ismi"
             />
-
-            <InputGroup className="grid-cols-2">
-              <InputField
-                label="Ota-ona ismi"
-                name="parentName"
-                value={form.parentName}
-                onChange={(e) => setField("parentName", e.target.value)}
-                placeholder="Ota-ona ismi"
-              />
-              <InputField
-                type="tel"
-                label="Ota-ona telefoni"
-                name="parentPhone"
-                value={form.parentPhone}
-                onChange={(e) => setField("parentPhone", e.target.value)}
-                placeholder="+998..."
-              />
-            </InputGroup>
-
             <InputField
-              label="Manzil"
-              name="address"
-              value={form.address}
-              onChange={(e) => setField("address", e.target.value)}
-              placeholder="Manzil"
+              type="tel"
+              label="Ota-ona telefoni"
+              name="parentPhone"
+              value={form.parentPhone}
+              onChange={(e) => setField("parentPhone", e.target.value)}
+              placeholder="+998..."
             />
+          </InputGroup>
 
-            <InputGroup className="grid-cols-2">
-              <InputField
-                type="date"
-                label="Sotuv sanasi"
-                name="createdAt"
-                value={form.createdAt}
-                onChange={(e) => setField("createdAt", e.target.value)}
-              />
-              <InputField
-                type="date"
-                label="Kutilayotgan ro'yxat sanasi"
-                name="expectedEnrollDate"
-                value={form.expectedEnrollDate}
-                onChange={(e) => setField("expectedEnrollDate", e.target.value)}
-              />
-            </InputGroup>
+          <InputField
+            label="Manzil"
+            name="address"
+            value={form.address}
+            onChange={(e) => setField("address", e.target.value)}
+            placeholder="Manzil"
+          />
 
+          <InputGroup className="grid-cols-2">
             <InputField
-              type="textarea"
-              label="Izoh"
-              name="notes"
-              value={form.notes}
-              onChange={(e) => setField("notes", e.target.value)}
-              placeholder="Qo'shimcha izoh..."
+              type="date"
+              label="Sotuv sanasi"
+              name="createdAt"
+              value={form.createdAt}
+              onChange={(e) => setField("createdAt", e.target.value)}
             />
+            <InputField
+              type="date"
+              label="Kutilayotgan ro'yxat sanasi"
+              name="expectedEnrollDate"
+              value={form.expectedEnrollDate}
+              onChange={(e) => setField("expectedEnrollDate", e.target.value)}
+            />
+          </InputGroup>
 
-            <Button
-              type="submit"
-              className="w-full"
-              disabled={mutation.isPending}
-            >
-              {mutation.isPending
-                ? "Saqlanmoqda..."
-                : isEdit
-                  ? "Saqlash"
-                  : "Yaratish"}
-            </Button>
-          </form>
-        </Card>
-      </div>
+          <InputField
+            type="textarea"
+            label="Izoh"
+            name="notes"
+            value={form.notes}
+            onChange={(e) => setField("notes", e.target.value)}
+            placeholder="Qo'shimcha izoh..."
+          />
+
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={mutation.isPending}
+          >
+            {mutation.isPending
+              ? "Saqlanmoqda..."
+              : isEdit
+                ? "Saqlash"
+                : "Yaratish"}
+          </Button>
+        </form>
+      </Card>
     </div>
   );
 };
