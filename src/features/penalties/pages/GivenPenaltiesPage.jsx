@@ -1,0 +1,135 @@
+// TanStack Query
+import { useQuery } from "@tanstack/react-query";
+
+// API
+import { penaltiesAPI } from "@/features/penalties/api/penalties.api";
+
+// Components
+import Card from "@/shared/components/ui/Card";
+import Button from "@/shared/components/ui/button/Button";
+
+// Data
+import {
+  penaltyStatusLabels,
+  penaltyStatusColors,
+} from "../data/penalties.data";
+
+// Utils
+import { formatDateUZ } from "@/shared/utils/date.utils";
+
+// Hooks
+import { useState } from "react";
+
+const GivenPenaltiesPage = () => {
+  const [page, setPage] = useState(1);
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["penalties", "given", page],
+    queryFn: () =>
+      penaltiesAPI.getGivenPenalties({ page, limit: 20 }).then((res) => res.data),
+  });
+
+  const penalties = data?.data || [];
+  const totalPages = data?.pagination?.totalPages || 1;
+
+  return (
+    <div className="space-y-4">
+      <Card>
+        <h2 className="text-xl font-bold text-gray-900">Bergan jarimalarim</h2>
+      </Card>
+
+      {isLoading ? (
+        <Card>
+          <p className="text-sm text-gray-500 text-center py-8">Yuklanmoqda...</p>
+        </Card>
+      ) : penalties.length === 0 ? (
+        <Card>
+          <p className="text-sm text-gray-500 text-center py-8">
+            Jarimalar topilmadi
+          </p>
+        </Card>
+      ) : (
+        <Card>
+          <div className="overflow-x-auto rounded-lg">
+            <table className="w-full text-sm">
+              <thead>
+                <tr>
+                  <th className="text-left py-2.5 px-3.5 font-medium">
+                    Foydalanuvchi
+                  </th>
+                  <th className="text-left py-2.5 px-3.5 font-medium">Sabab</th>
+                  <th className="text-left py-2.5 px-3.5 font-medium">Ball</th>
+                  <th className="text-left py-2.5 px-3.5 font-medium">Status</th>
+                  <th className="text-left py-2.5 px-3.5 font-medium">Sana</th>
+                </tr>
+              </thead>
+              <tbody>
+                {penalties.map((penalty) => (
+                  <tr key={penalty._id} className="border-t border-gray-50">
+                    <td className="py-2.5 px-3.5">
+                      <p className="font-medium">
+                        {penalty.user?.firstName} {penalty.user?.lastName}
+                      </p>
+                      {penalty.user?.username && (
+                        <p className="text-xs text-gray-400 mt-0.5">
+                          @{penalty.user.username}
+                        </p>
+                      )}
+                    </td>
+                    <td className="py-2.5 px-3.5">
+                      <p className="font-medium">{penalty.title}</p>
+                      {penalty.description && (
+                        <p className="text-gray-400 text-xs mt-0.5">
+                          {penalty.description}
+                        </p>
+                      )}
+                    </td>
+                    <td className="py-2.5 px-3.5 font-semibold text-red-600">
+                      {penalty.points}
+                    </td>
+                    <td className="py-2.5 px-3.5">
+                      <span
+                        className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium ${penaltyStatusColors[penalty.status]}`}
+                      >
+                        {penaltyStatusLabels[penalty.status]}
+                      </span>
+                    </td>
+                    <td className="py-2.5 px-3.5 text-gray-500">
+                      {formatDateUZ(penalty.createdAt)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {totalPages > 1 && (
+            <div className="flex justify-center gap-2 mt-4 pt-4 border-t">
+              <Button
+                variant="outline"
+                disabled={page <= 1}
+                onClick={() => setPage((p) => p - 1)}
+                className="text-xs px-3"
+              >
+                Oldingi
+              </Button>
+              <span className="flex items-center text-sm text-gray-500">
+                {page} / {totalPages}
+              </span>
+              <Button
+                variant="outline"
+                disabled={page >= totalPages}
+                onClick={() => setPage((p) => p + 1)}
+                className="text-xs px-3"
+              >
+                Keyingi
+              </Button>
+            </div>
+          )}
+        </Card>
+      )}
+    </div>
+  );
+};
+
+export default GivenPenaltiesPage;
