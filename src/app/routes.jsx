@@ -13,6 +13,9 @@ import DashboardPage from "@/features/dashboard/pages/DashboardPage";
 
 // Pages — Penalties
 import MyPenaltiesPage from "@/features/penalties/pages/MyPenaltiesPage";
+import CreatePenaltyPage from "@/features/penalties/pages/CreatePenaltyPage";
+import GivenPenaltiesPage from "@/features/penalties/pages/GivenPenaltiesPage";
+import ReducePenaltyPage from "@/features/penalties/pages/ReducePenaltyPage";
 
 // Pages — Tasks
 import MyTasksPage from "@/features/tasks/pages/MyTasksPage";
@@ -46,6 +49,9 @@ const Routes = () => {
         <Route element={<DashboardLayout />}>
           <Route path="/" element={<DashboardPage />} />
           <Route path="/penalties/my" element={<MyPenaltiesPage />} />
+          <Route path="/penalties/create" element={<CreatePenaltyPage />} />
+          <Route path="/penalties/given" element={<GivenPenaltiesPage />} />
+          <Route path="/penalties/reduce" element={<ReducePenaltyPage />} />
 
           {/* Tasks */}
           <Route path="/tasks" element={<MyTasksPage />} />

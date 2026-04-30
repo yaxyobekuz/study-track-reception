@@ -86,6 +86,18 @@ const navItems = [
     isActive: false,
     items: [
       {
+        title: "Jarima yozish",
+        url: "/penalties/create",
+      },
+      {
+        title: "Bergan jarimalarim",
+        url: "/penalties/given",
+      },
+      {
+        title: "Jarima kamaytirish",
+        url: "/penalties/reduce",
+      },
+      {
         title: "Mening jarimalarim",
         url: "/penalties/my",
       },
