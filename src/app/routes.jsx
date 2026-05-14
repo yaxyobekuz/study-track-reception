@@ -25,6 +25,10 @@ import TaskDetailPage from "@/features/tasks/pages/TaskDetailPage";
 import AttendancePage from "@/features/attendance/pages/AttendancePage";
 import MyAttendancePage from "@/features/attendance/pages/MyAttendancePage";
 
+// Pages — Student Attendance
+import StudentAttendancePage from "@/features/studentAttendance/pages/StudentAttendancePage";
+import StudentAttendanceMarkPage from "@/features/studentAttendance/pages/StudentAttendanceMarkPage";
+
 // Pages — Leads
 import LeadsPage from "@/features/leads/pages/LeadsPage";
 import LeadDetailPage from "@/features/leads/pages/LeadDetailPage";
@@ -60,6 +64,10 @@ const Routes = () => {
           {/* Attendance */}
           <Route path="/attendance" element={<AttendancePage />} />
           <Route path="/attendance/my" element={<MyAttendancePage />} />
+
+          {/* Student Attendance */}
+          <Route path="/student-attendance" element={<StudentAttendancePage />} />
+          <Route path="/student-attendance/:classId" element={<StudentAttendanceMarkPage />} />
 
           {/* Leads */}
           <Route path="/leads" element={<LeadsPage />} />

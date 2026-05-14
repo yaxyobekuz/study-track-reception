@@ -116,6 +116,10 @@ const navItems = [
         title: "Mening davomatim",
         url: "/attendance/my",
       },
+      {
+        title: "O'quvchilar davomati",
+        url: "/student-attendance",
+      },
     ],
   },
   {
