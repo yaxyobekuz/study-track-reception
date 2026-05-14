@@ -216,7 +216,7 @@ const TaskDetailPage = () => {
               <h3 className="text-sm font-semibold text-gray-700 mb-3">Amal</h3>
               {!showSubmitForm ? (
                 <Button
-                  variant="primary"
+                  variant="default"
                   className="w-full text-sm"
                   onClick={() => setShowSubmitForm(true)}
                 >
@@ -254,7 +254,7 @@ const TaskDetailPage = () => {
                     </button>
                     <Button
                       type="submit"
-                      variant="primary"
+                      variant="default"
                       disabled={submitMutation.isPending}
                       className="flex-1 text-sm"
                     >
