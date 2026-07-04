@@ -1,34 +1,57 @@
 import { useState } from "react";
-import Button from "@/shared/components/ui/button/Button";
+import { toast } from "sonner";
 
-const ExcuseReasonModal = ({ onConfirm, onCancel }) => {
-  const [reason, setReason] = useState("");
+import Button from "@/shared/components/ui/button/Button";
+import SelectField from "@/shared/components/ui/select/SelectField";
+
+const ExcuseReasonModal = ({ reasons = [], onConfirm, onCancel }) => {
+  const [absenceReasonId, setAbsenceReasonId] = useState("");
+  const [note, setNote] = useState("");
+
+  const options = reasons.map((r) => ({ label: r.title, value: r._id }));
+  const noReasons = options.length === 0;
+
+  const handleConfirm = () => {
+    if (!absenceReasonId) return toast.warning("Sababni tanlang");
+    onConfirm({ absenceReasonId, note: note.trim() || null });
+  };
 
   return (
     <div className="space-y-4 pt-2">
-      <p className="text-sm text-gray-600">
-        Sababli deb belgilash uchun sabab yozishingiz mumkin (ixtiyoriy).
-      </p>
+      {noReasons ? (
+        <p className="text-sm text-red-500">
+          O&apos;quvchilar uchun sabablar mavjud emas. Administrator bilan
+          bog&apos;laning.
+        </p>
+      ) : (
+        <SelectField
+          required
+          label="Sabab"
+          value={absenceReasonId}
+          options={options}
+          placeholder="Sababni tanlang"
+          onChange={(v) => setAbsenceReasonId(v)}
+        />
+      )}
+
       <textarea
-        value={reason}
-        onChange={(e) => setReason(e.target.value)}
+        value={note}
+        onChange={(e) => setNote(e.target.value)}
         maxLength={300}
-        placeholder="Masalan: Kasal, Oilaviy sabab..."
+        placeholder="Qo'shimcha izoh (ixtiyoriy)"
         rows={3}
         className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary/30"
       />
-      <p className="text-xs text-gray-400 text-right">{reason.length}/300</p>
+      <p className="text-xs text-gray-400 text-right">{note.length}/300</p>
+
       <div className="flex gap-2">
-        <Button
-          variant="outline"
-          className="flex-1"
-          onClick={onCancel}
-        >
+        <Button variant="outline" className="flex-1" onClick={onCancel}>
           Bekor qilish
         </Button>
         <Button
           className="flex-1"
-          onClick={() => onConfirm(reason.trim() || null)}
+          disabled={noReasons}
+          onClick={handleConfirm}
         >
           Sababli qilish
         </Button>

@@ -34,6 +34,16 @@ const StudentAttendanceMarkPage = () => {
   const students = data?.students || [];
   const classInfo = data?.classInfo;
 
+  // Aktiv "Kelmaslik sabablari" -> o'quvchiga tegishlilari
+  const { data: reasonsData } = useQuery({
+    queryKey: ["absenceReasons", "active"],
+    queryFn: () =>
+      studentAttendanceAPI.getAbsenceReasons().then((r) => r.data.data),
+  });
+  const studentReasons = (reasonsData || []).filter(
+    (r) => r.appliesToAll || (r.roles || []).includes("student"),
+  );
+
   // summary hisobi
   const summary = { present: 0, late: 0, absent: 0, excused: 0, unmarked: 0 };
   for (const { student, attendance } of students) {
@@ -43,17 +53,17 @@ const StudentAttendanceMarkPage = () => {
     else summary[status] = (summary[status] || 0) + 1;
   }
 
-  const applyStatus = useCallback((studentId, status, excuseReason = undefined) => {
+  const applyStatus = useCallback((studentId, status, excuse = undefined) => {
     setLocalStatuses((prev) => ({ ...prev, [studentId]: status }));
     setPendingIds((prev) => new Set([...prev, studentId]));
 
-    if (excuseReason !== undefined) {
-      // excuseReason ni ayrida saqlab qo'yamiz
-      setExcuseReasons((prev) => ({ ...prev, [studentId]: excuseReason }));
+    if (excuse !== undefined) {
+      // { absenceReasonId, note } ni alohida saqlab qo'yamiz
+      setExcuseData((prev) => ({ ...prev, [studentId]: excuse }));
     }
   }, []);
 
-  const [excuseReasons, setExcuseReasons] = useState({});
+  const [excuseData, setExcuseData] = useState({});
 
   const handleCycle = useCallback(
     (studentId, nextStatus) => {
@@ -66,9 +76,9 @@ const StudentAttendanceMarkPage = () => {
     [applyStatus]
   );
 
-  const handleExcuseConfirm = (reason) => {
+  const handleExcuseConfirm = (payload) => {
     const { studentId } = excuseModal;
-    applyStatus(studentId, "excused", reason || null);
+    applyStatus(studentId, "excused", payload);
     setExcuseModal(null);
   };
 
@@ -100,14 +110,25 @@ const StudentAttendanceMarkPage = () => {
     for (const studentId of pendingIds) {
       const status = localStatuses[studentId];
       if (!status) continue;
-      records.push({
-        studentId,
-        status,
-        excuseReason: excuseReasons[studentId] || undefined,
-      });
+      const rec = { studentId, status };
+      if (status === "excused") {
+        const ex = excuseData[studentId] || {};
+        rec.absenceReason = ex.absenceReasonId;
+        rec.excuseReason = ex.note || undefined;
+      }
+      records.push(rec);
     }
 
     if (records.length === 0) return;
+
+    // "Sababli" uchun sabab majburiy
+    const missing = records.find(
+      (r) => r.status === "excused" && !r.absenceReason,
+    );
+    if (missing) {
+      toast.warning("'Sababli' o'quvchi uchun sabab tanlang");
+      return;
+    }
 
     setSaving(true);
     try {
@@ -129,7 +150,7 @@ const StudentAttendanceMarkPage = () => {
 
       // Local state'ni tozalash (yangi data query'dan keladi)
       setLocalStatuses({});
-      setExcuseReasons({});
+      setExcuseData({});
 
       toast.success(`${records.length} ta o'quvchi davomati saqlandi`);
     } catch {
@@ -218,6 +239,7 @@ const StudentAttendanceMarkPage = () => {
           <div className="bg-white w-full max-w-sm rounded-t-2xl sm:rounded-2xl p-5 shadow-xl">
             <h2 className="font-semibold text-gray-900 mb-1">Sababli</h2>
             <ExcuseReasonModal
+              reasons={studentReasons}
               onConfirm={handleExcuseConfirm}
               onCancel={handleExcuseCancel}
             />
