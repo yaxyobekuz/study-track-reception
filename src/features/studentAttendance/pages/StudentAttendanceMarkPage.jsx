@@ -17,9 +17,9 @@ const StudentAttendanceMarkPage = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  // localStatuses: { [studentId]: status } — faqat o'zgartirilganlar
+  // localStatuses: { [studentId]: status } - faqat o'zgartirilganlar
   const [localStatuses, setLocalStatuses] = useState({});
-  // pendingIds: Set — o'zgartirilgan lekin saqlanmagan student idlar
+  // pendingIds: Set - o'zgartirilgan lekin saqlanmagan student idlar
   const [pendingIds, setPendingIds] = useState(new Set());
   // excuseModal: { studentId, nextStatus } | null
   const [excuseModal, setExcuseModal] = useState(null);

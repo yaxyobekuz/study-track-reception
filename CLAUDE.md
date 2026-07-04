@@ -1,4 +1,4 @@
-# Claude Code — Reception Module Rules
+# Claude Code - Reception Module Rules
 
 > Global rules in root CLAUDE.md also apply.
 

@@ -5,31 +5,31 @@ import DashboardLayout from "@/shared/layouts/DashboardLayout";
 import AuthGuard from "@/shared/components/guards/AuthGuard";
 import GuestGuard from "@/shared/components/guards/GuestGuard";
 
-// Pages — Auth
+// Pages - Auth
 import LoginPage from "@/features/auth/pages/LoginPage";
 
-// Pages — Dashboard
+// Pages - Dashboard
 import DashboardPage from "@/features/dashboard/pages/DashboardPage";
 
-// Pages — Penalties
+// Pages - Penalties
 import MyPenaltiesPage from "@/features/penalties/pages/MyPenaltiesPage";
 import CreatePenaltyPage from "@/features/penalties/pages/CreatePenaltyPage";
 import GivenPenaltiesPage from "@/features/penalties/pages/GivenPenaltiesPage";
 import ReducePenaltyPage from "@/features/penalties/pages/ReducePenaltyPage";
 
-// Pages — Tasks
+// Pages - Tasks
 import MyTasksPage from "@/features/tasks/pages/MyTasksPage";
 import TaskDetailPage from "@/features/tasks/pages/TaskDetailPage";
 
-// Pages — Attendance
+// Pages - Attendance
 import AttendancePage from "@/features/attendance/pages/AttendancePage";
 import MyAttendancePage from "@/features/attendance/pages/MyAttendancePage";
 
-// Pages — Student Attendance
+// Pages - Student Attendance
 import StudentAttendancePage from "@/features/studentAttendance/pages/StudentAttendancePage";
 import StudentAttendanceMarkPage from "@/features/studentAttendance/pages/StudentAttendanceMarkPage";
 
-// Pages — Leads
+// Pages - Leads
 import LeadsPage from "@/features/leads/pages/LeadsPage";
 import LeadDetailPage from "@/features/leads/pages/LeadDetailPage";
 import LeadSourcesPage from "@/features/leads/pages/LeadSourcesPage";
