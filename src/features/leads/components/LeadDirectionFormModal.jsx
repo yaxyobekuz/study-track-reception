@@ -25,7 +25,7 @@ const LeadDirectionFormModal = () => {
   return (
     <ResponsiveModal
       name="leadDirectionForm"
-      title={data?._id ? "Yo'nalishni tahrirlash" : "Yangi yo'nalish qo'shish"}
+      title={data?.id ? "Yo'nalishni tahrirlash" : "Yangi yo'nalish qo'shish"}
     >
       <Content />
     </ResponsiveModal>
@@ -33,7 +33,7 @@ const LeadDirectionFormModal = () => {
 };
 
 const Content = ({
-  _id,
+  id,
   close,
   isLoading,
   setIsLoading,
@@ -41,7 +41,7 @@ const Content = ({
   description: directionDescription,
 }) => {
   const queryClient = useQueryClient();
-  const isEdit = !!_id;
+  const isEdit = !!id;
 
   const { state, setField, setFields } = useObjectState({
     name: "",
@@ -57,11 +57,11 @@ const Content = ({
     } else {
       setFields({ name: "", description: "" });
     }
-  }, [_id]);
+  }, [id]);
 
   const mutation = useMutation({
     mutationFn: (data) =>
-      isEdit ? leadsAPI.updateDirection(_id, data) : leadsAPI.createDirection(data),
+      isEdit ? leadsAPI.updateDirection(id, data) : leadsAPI.createDirection(data),
     onSuccess: () => {
       toast.success(isEdit ? "Yo'nalish yangilandi" : "Yo'nalish yaratildi");
       queryClient.invalidateQueries({ queryKey: ["lead-directions"] });

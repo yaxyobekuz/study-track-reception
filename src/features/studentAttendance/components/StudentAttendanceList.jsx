@@ -12,7 +12,7 @@ const StudentAttendanceList = ({ students, statuses, pendingIds, onCycle }) => {
   return (
     <div className="divide-y divide-gray-100">
       {students.map(({ student, attendance }) => {
-        const studentId = String(student._id);
+        const studentId = String(student.id);
         const currentStatus =
           statuses[studentId] ?? (attendance?.status || null);
         const isPending = pendingIds.has(studentId);

@@ -55,7 +55,7 @@ const LeadFormContent = ({ lead, close, isLoading, setIsLoading }) => {
         lastName: lead.lastName || "",
         phone: lead.phone || "",
         additionalPhone: lead.additionalPhone || "",
-        source: lead.source?._id || lead.source || "",
+        source: lead.source?.id || lead.source || "",
         classInterest: lead.classInterest || "",
         parentName: lead.parentName || "",
         parentPhone: lead.parentPhone || "",
@@ -70,7 +70,7 @@ const LeadFormContent = ({ lead, close, isLoading, setIsLoading }) => {
 
   const mutation = useMutation({
     mutationFn: (data) =>
-      isEdit ? leadsAPI.update(lead._id, data) : leadsAPI.create(data),
+      isEdit ? leadsAPI.update(lead.id, data) : leadsAPI.create(data),
     onSuccess: () => {
       toast.success(
         isEdit
@@ -150,7 +150,7 @@ const LeadFormContent = ({ lead, close, isLoading, setIsLoading }) => {
         value={form.source}
         onChange={(v) => setField("source", v)}
         placeholder="Manbani tanlang..."
-        options={sources.map((s) => ({ value: s._id, label: s.name }))}
+        options={sources.map((s) => ({ value: s.id, label: s.name }))}
       />
 
       <InputField

@@ -68,9 +68,9 @@ const LeadFormPage = () => {
         lastName: lead.lastName || "",
         phone: lead.phone || "",
         additionalPhone: lead.additionalPhone || "",
-        source: lead.source?._id || lead.source || "",
-        direction: lead.direction?._id || lead.direction || "",
-        category: lead.category?._id || lead.category || "",
+        source: lead.source?.id || lead.source || "",
+        direction: lead.direction?.id || lead.direction || "",
+        category: lead.category?.id || lead.category || "",
         classInterest: lead.classInterest || "",
         parentName: lead.parentName || "",
         parentPhone: lead.parentPhone || "",
@@ -204,7 +204,7 @@ const LeadFormPage = () => {
             value={form.source}
             onChange={(v) => setField("source", v)}
             placeholder="Manbani tanlang..."
-            options={sources.map((s) => ({ value: s._id, label: s.name }))}
+            options={sources.map((s) => ({ value: s.id, label: s.name }))}
           />
 
           <InputGroup className="grid-cols-2">
@@ -217,7 +217,7 @@ const LeadFormPage = () => {
               onChange={(v) => setField("direction", v)}
               placeholder="Yo'nalishni tanlang..."
               options={directions.map((d) => ({
-                value: d._id,
+                value: d.id,
                 label: d.name,
               }))}
             />
@@ -230,7 +230,7 @@ const LeadFormPage = () => {
               onChange={(v) => setField("category", v)}
               placeholder="Toifani tanlang..."
               options={categories.map((c) => ({
-                value: c._id,
+                value: c.id,
                 label: c.name,
               }))}
             />

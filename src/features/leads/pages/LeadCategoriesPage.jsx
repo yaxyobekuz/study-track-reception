@@ -75,7 +75,7 @@ const LeadCategoriesPage = () => {
             <tbody>
               {categories.map((category) => (
                 <tr
-                  key={category._id}
+                  key={category.id}
                   className="border-b border-gray-50 hover:bg-gray-50/50"
                 >
                   <td className="py-2.5 px-3 font-medium text-gray-800">
@@ -90,7 +90,7 @@ const LeadCategoriesPage = () => {
                     <button
                       onClick={() =>
                         toggleActiveMutation.mutate({
-                          id: category._id,
+                          id: category.id,
                           isActive: !category.isActive,
                         })
                       }

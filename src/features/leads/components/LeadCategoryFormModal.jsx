@@ -25,7 +25,7 @@ const LeadCategoryFormModal = () => {
   return (
     <ResponsiveModal
       name="leadCategoryForm"
-      title={data?._id ? "Toifani tahrirlash" : "Yangi toifa qo'shish"}
+      title={data?.id ? "Toifani tahrirlash" : "Yangi toifa qo'shish"}
     >
       <Content />
     </ResponsiveModal>
@@ -33,7 +33,7 @@ const LeadCategoryFormModal = () => {
 };
 
 const Content = ({
-  _id,
+  id,
   close,
   isLoading,
   setIsLoading,
@@ -41,7 +41,7 @@ const Content = ({
   description: categoryDescription,
 }) => {
   const queryClient = useQueryClient();
-  const isEdit = !!_id;
+  const isEdit = !!id;
 
   const { state, setField, setFields } = useObjectState({
     name: "",
@@ -57,11 +57,11 @@ const Content = ({
     } else {
       setFields({ name: "", description: "" });
     }
-  }, [_id]);
+  }, [id]);
 
   const mutation = useMutation({
     mutationFn: (data) =>
-      isEdit ? leadsAPI.updateCategory(_id, data) : leadsAPI.createCategory(data),
+      isEdit ? leadsAPI.updateCategory(id, data) : leadsAPI.createCategory(data),
     onSuccess: () => {
       toast.success(isEdit ? "Toifa yangilandi" : "Toifa yaratildi");
       queryClient.invalidateQueries({ queryKey: ["lead-categories"] });

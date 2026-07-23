@@ -25,7 +25,7 @@ const LeadSourceFormModal = () => {
   return (
     <ResponsiveModal
       name="leadSourceForm"
-      title={data?._id ? "Manbani tahrirlash" : "Yangi manba qo'shish"}
+      title={data?.id ? "Manbani tahrirlash" : "Yangi manba qo'shish"}
     >
       <Content />
     </ResponsiveModal>
@@ -33,7 +33,7 @@ const LeadSourceFormModal = () => {
 };
 
 const Content = ({
-  _id,
+  id,
   close,
   isLoading,
   setIsLoading,
@@ -41,7 +41,7 @@ const Content = ({
   description: sourceDescription,
 }) => {
   const queryClient = useQueryClient();
-  const isEdit = !!_id;
+  const isEdit = !!id;
 
   const { state, setField, setFields } = useObjectState({
     name: "",
@@ -57,11 +57,11 @@ const Content = ({
     } else {
       setFields({ name: "", description: "" });
     }
-  }, [_id]);
+  }, [id]);
 
   const mutation = useMutation({
     mutationFn: (data) =>
-      isEdit ? leadsAPI.updateSource(_id, data) : leadsAPI.createSource(data),
+      isEdit ? leadsAPI.updateSource(id, data) : leadsAPI.createSource(data),
     onSuccess: () => {
       toast.success(isEdit ? "Manba yangilandi" : "Manba yaratildi");
       queryClient.invalidateQueries({ queryKey: ["lead-sources"] });

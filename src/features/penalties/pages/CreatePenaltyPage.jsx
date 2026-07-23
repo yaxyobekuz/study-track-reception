@@ -38,7 +38,7 @@ const CreatePenaltyPage = () => {
   const targetUsers = allUsers
     .filter((u) => u.role !== "owner")
     .map((u) => ({
-      value: u._id,
+      value: u.id,
       label: `${u.firstName}${u.lastName ? ` ${u.lastName}` : ""} (${u.role})`,
     }));
 
@@ -47,7 +47,7 @@ const CreatePenaltyPage = () => {
     queryFn: () => penaltiesAPI.getCategories().then((res) => res.data.data),
     select: (data) =>
       data.map((c) => ({
-        value: c._id,
+        value: c.id,
         label: `${c.title} (${c.points} ball)`,
       })),
   });

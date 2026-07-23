@@ -47,7 +47,7 @@ const StudentAttendanceMarkPage = () => {
   // summary hisobi
   const summary = { present: 0, late: 0, absent: 0, excused: 0, unmarked: 0 };
   for (const { student, attendance } of students) {
-    const id = String(student._id);
+    const id = String(student.id);
     const status = localStatuses[id] ?? (attendance?.status || null);
     if (!status) summary.unmarked++;
     else summary[status] = (summary[status] || 0) + 1;
@@ -92,7 +92,7 @@ const StudentAttendanceMarkPage = () => {
     const newStatuses = {};
     const newPending = new Set(pendingIds);
     for (const { student, attendance } of students) {
-      const id = String(student._id);
+      const id = String(student.id);
       // Faqat belgilanmagan yoki present bo'lmaganlarni o'zgartirish
       if (!attendance || attendance.status !== "present") {
         newStatuses[id] = "present";

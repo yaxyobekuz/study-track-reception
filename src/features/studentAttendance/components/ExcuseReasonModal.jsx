@@ -8,7 +8,7 @@ const ExcuseReasonModal = ({ reasons = [], onConfirm, onCancel }) => {
   const [absenceReasonId, setAbsenceReasonId] = useState("");
   const [note, setNote] = useState("");
 
-  const options = reasons.map((r) => ({ label: r.title, value: r._id }));
+  const options = reasons.map((r) => ({ label: r.title, value: r.id }));
   const noReasons = options.length === 0;
 
   const handleConfirm = () => {

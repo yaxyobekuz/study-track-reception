@@ -21,11 +21,11 @@ const LeadSourceDeleteModal = () => (
   </ResponsiveModal>
 );
 
-const Content = ({ close, isLoading, setIsLoading, _id, name }) => {
+const Content = ({ close, isLoading, setIsLoading, id, name }) => {
   const queryClient = useQueryClient();
 
   const deleteMutation = useMutation({
-    mutationFn: () => leadsAPI.deleteSource(_id),
+    mutationFn: () => leadsAPI.deleteSource(id),
     onSuccess: () => {
       toast.success("Manba o'chirildi");
       queryClient.invalidateQueries({ queryKey: ["lead-sources"] });

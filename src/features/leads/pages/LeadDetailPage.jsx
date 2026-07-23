@@ -148,7 +148,7 @@ const LeadDetailPage = () => {
             className="gap-1.5 text-sm"
             onClick={() =>
               openStatusModal("leadStatus", {
-                leadId: lead._id,
+                leadId: lead.id,
                 currentStatus: lead.status,
               })
             }
@@ -159,7 +159,7 @@ const LeadDetailPage = () => {
           <Button
             variant="outline"
             className="gap-1.5 text-sm"
-            onClick={() => navigate(`/leads/${lead._id}/edit`)}
+            onClick={() => navigate(`/leads/${lead.id}/edit`)}
           >
             <Edit size={14} />
             Tahrirlash
@@ -363,7 +363,7 @@ const LeadDetailPage = () => {
               ) : (
                 activities.map((activity) => (
                   <div
-                    key={activity._id}
+                    key={activity.id}
                     className="relative pl-4 pb-3 border-l-2 border-gray-200 last:border-l-transparent last:pb-0"
                   >
                     {/* Dot */}

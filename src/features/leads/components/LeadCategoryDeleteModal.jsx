@@ -21,11 +21,11 @@ const LeadCategoryDeleteModal = () => (
   </ResponsiveModal>
 );
 
-const Content = ({ close, isLoading, setIsLoading, _id }) => {
+const Content = ({ close, isLoading, setIsLoading, id }) => {
   const queryClient = useQueryClient();
 
   const deleteMutation = useMutation({
-    mutationFn: () => leadsAPI.deleteCategory(_id),
+    mutationFn: () => leadsAPI.deleteCategory(id),
     onSuccess: () => {
       toast.success("Toifa o'chirildi");
       queryClient.invalidateQueries({ queryKey: ["lead-categories"] });

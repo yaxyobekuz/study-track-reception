@@ -75,7 +75,7 @@ const LeadDirectionsPage = () => {
             <tbody>
               {directions.map((direction) => (
                 <tr
-                  key={direction._id}
+                  key={direction.id}
                   className="border-b border-gray-50 hover:bg-gray-50/50"
                 >
                   <td className="py-2.5 px-3 font-medium text-gray-800">
@@ -90,7 +90,7 @@ const LeadDirectionsPage = () => {
                     <button
                       onClick={() =>
                         toggleActiveMutation.mutate({
-                          id: direction._id,
+                          id: direction.id,
                           isActive: !direction.isActive,
                         })
                       }

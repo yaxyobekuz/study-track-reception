@@ -21,11 +21,11 @@ const LeadDirectionDeleteModal = () => (
   </ResponsiveModal>
 );
 
-const Content = ({ close, isLoading, setIsLoading, _id }) => {
+const Content = ({ close, isLoading, setIsLoading, id }) => {
   const queryClient = useQueryClient();
 
   const deleteMutation = useMutation({
-    mutationFn: () => leadsAPI.deleteDirection(_id),
+    mutationFn: () => leadsAPI.deleteDirection(id),
     onSuccess: () => {
       toast.success("Yo'nalish o'chirildi");
       queryClient.invalidateQueries({ queryKey: ["lead-directions"] });

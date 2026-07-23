@@ -22,7 +22,7 @@ const StudentAttendancePage = () => {
       ) : (
         <div className="space-y-2">
           {data.map((cls) => (
-            <ClassSummaryCard key={cls._id} cls={cls} />
+            <ClassSummaryCard key={cls.id} cls={cls} />
           ))}
         </div>
       )}

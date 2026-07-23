@@ -32,7 +32,7 @@ const ReducePenaltyPage = () => {
   const targetUsers = allUsers
     .filter((u) => u.role !== "owner")
     .map((u) => ({
-      value: u._id,
+      value: u.id,
       label: `${u.firstName}${u.lastName ? ` ${u.lastName}` : ""} (${u.role})`,
     }));
 

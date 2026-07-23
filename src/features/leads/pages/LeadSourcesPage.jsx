@@ -75,7 +75,7 @@ const LeadSourcesPage = () => {
             <tbody>
               {sources.map((source) => (
                 <tr
-                  key={source._id}
+                  key={source.id}
                   className="border-b border-gray-50 hover:bg-gray-50/50"
                 >
                   <td className="py-2.5 px-3 font-medium text-gray-800">
@@ -90,7 +90,7 @@ const LeadSourcesPage = () => {
                     <button
                       onClick={() =>
                         toggleActiveMutation.mutate({
-                          id: source._id,
+                          id: source.id,
                           isActive: !source.isActive,
                         })
                       }

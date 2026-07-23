@@ -65,7 +65,7 @@ const GivenPenaltiesPage = () => {
               </thead>
               <tbody>
                 {penalties.map((penalty) => (
-                  <tr key={penalty._id} className="border-t border-gray-50">
+                  <tr key={penalty.id} className="border-t border-gray-50">
                     <td className="py-2.5 px-3.5">
                       <p className="font-medium">
                         {penalty.user?.firstName} {penalty.user?.lastName}
